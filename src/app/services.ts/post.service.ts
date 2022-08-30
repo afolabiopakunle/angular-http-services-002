@@ -30,6 +30,6 @@ export class PostService {
   }
 
   errorHandler(error: HttpErrorResponse) {
-    return Observable.throw(() => error.message || "server error.");
+    return throwError(() => error.message || "server error.");
   }
 }
