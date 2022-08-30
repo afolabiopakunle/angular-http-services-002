@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http'
+
+interface IPost {
+  body: string;
+  id: number;
+  userId: number;
+  title: string;
+}
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -7,9 +14,13 @@ import { HttpClient} from '@angular/common/http'
 })
 export class PostComponent implements OnInit {
 
-  posts: any[];
+  posts: IPost[];
 
   constructor(private http: HttpClient) {
+    http.get('https://jsonplaceholder.typicode.com/posts')
+    .subscribe((response: IPost[]) => {
+      this.posts = response
+    })
   }
 
   ngOnInit() {
