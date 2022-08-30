@@ -26,10 +26,15 @@ export class PostComponent implements OnInit {
     .subscribe(
       (response: IPost[]) => {
       this.posts = response
-    }, error => {
+    }, 
+    (error: Response) => {
+      if(error?.status === 400) {
+        alert('An expected error error')
+      }
       alert('An unexpected error occured!');
       console.log(error)
-    });
+    }
+    );
   }
 
   createPost(input: HTMLInputElement) {

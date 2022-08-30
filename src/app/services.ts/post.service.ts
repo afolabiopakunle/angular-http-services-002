@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
 
-  private url = 'https://jsonplaceholder.typicode.com/posts';
+  private url = 'https://jsonplaceholdessr.typicode.com/posts';
 
   constructor(private http: HttpClient) {}
 
@@ -30,6 +30,9 @@ export class PostService {
   }
 
   errorHandler(error: HttpErrorResponse) {
-    return throwError(() => error.message || "server error.");
+    return throwError(() => {
+      console.log(error.message)
+      error.message || "server error."
+    });
   }
 }
