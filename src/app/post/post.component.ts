@@ -23,8 +23,12 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.postService.getPosts()
-    .subscribe((response: IPost[]) => {
+    .subscribe(
+      (response: IPost[]) => {
       this.posts = response
+    }, error => {
+      alert('An unexpected error occured!');
+      console.log(error)
     });
   }
 
@@ -37,29 +41,43 @@ export class PostComponent implements OnInit {
     }
     console.log(post)
     input.value = '';
-      // this.http.post(this.url, post)
-      // .subscribe((response:IPost) => {
-      //   console.log(response)
-      //   post['title'] = response.title
-      //   post['id'] = response.id
-      //   post['body'] = ''
-      //   post['userId'] = 0
-      //   this.posts.unshift(post)
-      // })
+      this.postService.createPost(post)
+      .subscribe(
+        (response:IPost) => {
+        console.log(response)
+        post['title'] = response.title
+        post['id'] = response.id
+        post['body'] = ''
+        post['userId'] = 0
+        this.posts.unshift(post)
+      }, error => {
+        alert('An unexpected error occured')
+        console.log(error)
+      })
   }
 
   updatePost(post) {
-    // this.http.patch(this.url + '/' + post.id, {isRead: true})
-    // .subscribe(response => {
-    //   console.log(response)
-    // })
+    this.postService.updatePosts(post)
+    .subscribe(
+      response => {
+      console.log(response)
+    }, error => {
+      console.log(error)
+    })
   }
 
   deletePost(post) {
-    // this.http.delete(this.url + '/' + post.id)
-    // .subscribe(response => {
-    //   let index = this.posts.indexOf(post)
-    //   this.posts.splice(index, 1)
-    // })
+   this.postService.deletePost(878) 
+    .subscribe(
+      response => {
+      let index = this.posts.indexOf(post)
+      this.posts.splice(index, 1)
+    }, (error: Response) => {
+      if(error.status === 404) {
+        alert('This post has been deleteeeeeee')
+      }
+      alert('An unexpected error occured');
+      console.log(error)
+    })
   }
 }
