@@ -9,7 +9,7 @@ export class PostComponent implements OnInit {
 
   posts: any[];
 
-  constructor() {
+  constructor(private thalalalla) {
   }
 
   ngOnInit() {
@@ -43,18 +43,18 @@ export class PostComponent implements OnInit {
   //       });
   // }
 
-  // deletePost(post) {
-  //   this.service.delete(post.id)
-  //     .subscribe(
-  //       () => {
-  //         let index = this.posts.indexOf(post);
-  //         this.posts.splice(index, 1);
-  //       },
-  //       (error: AppError) => {
-  //         if (error instanceof NotFoundError)
-  //           alert('This post has already been deleted.');
-  //         else throw error;
-  //       });
-  // }
+  deletePost(post) {
+    // this.service.delete(post.id)
+      // .subscribe(
+        // () => {
+        //   let index = this.posts.indexOf(post);
+        //   this.posts.splice(index, 1);
+        // },
+        // (error: AppError) => {
+        //   if (error instanceof NotFoundError)
+        //     alert('This post has already been deleted.');
+        //   else throw error;
+        // });
+  }
 
 }
